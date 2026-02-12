@@ -1,0 +1,33 @@
+name: TypeScript CI
+
+on:
+    push:
+        branches: [ master ]
+    pull_request:
+        branches: [ master ]
+
+jobs:
+    build:
+        name: build and run tests
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: Checkout repository
+              uses: action/checkout@v4
+
+            # - name: Setup Node.js
+            #   uses: actions/setup-node@v4
+            #   with: 
+            #     node-version: 22
+            - name: Install deps
+              run: |
+                npm install
+
+            - name: Run tests
+              run: |
+                npm vitest -- --coverage
+            
+            - name: Upload coverage
+              uses: codecov/codecov-action@v4
+              with:
+                files: ./coverage/lcov.info
