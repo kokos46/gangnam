@@ -25,7 +25,7 @@ jobs:
 
             - name: Run tests
               run: |
-                npm vitest -- --coverage
+                npx vitest --coverage
             
             - name: Upload coverage
               uses: codecov/codecov-action@v4
